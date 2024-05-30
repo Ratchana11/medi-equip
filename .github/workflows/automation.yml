@@ -1,0 +1,39 @@
+name: Cypress Workflow Dispatch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  
+  production-plan:
+    runs-on: ubuntu-latest
+    env:
+      USER_NAME: ${{ vars.TEST_USER_NAME }}
+      PASSWORD: ${{ vars.TEST_PASSWORD }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Cypress
+        run: npm install cypress --save-dev
+
+      - name: Run Cypress test file 1
+        run: npx cypress run --spec "cypress/e2e/equipment.cy.js" --config-file=./cypress.config.js
+        continue-on-error: true
+
+  material-request:
+    runs-on: ubuntu-latest
+    needs: production-plan
+    env:
+      USER_NAME: ${{ vars.TEST_USER_NAME }}
+      PASSWORD: ${{ vars.TEST_PASSWORD }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install Cypress
+        run: npm install cypress --save-dev
+
+      - name: Run Cypress test file 2
+        run: npx cypress run --spec "cypress/e2e/equipment.cy.js" --config-file=./cypress.config.js
+        continue-on-error: true
