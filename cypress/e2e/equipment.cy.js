@@ -1,7 +1,8 @@
-import * as env from './variables/equipmentenv.js';
+import * as env from './env2.js';
 /// <reference types="cypress" />
 describe('Assessment', () => {
-    it('Assessment', () => {
+    
+    it('Production Plan', () => {
         cy.visit('https://demolens.lmnas.com/login#login');
         const username = Cypress.env('username');
         const password = Cypress.env('password');
@@ -11,15 +12,18 @@ describe('Assessment', () => {
         cy.location('pathname', { timeout: 10000 }).should('include', '/app');
         cy.visit('https://demolens.lmnas.com/app/production-plan');
         cy.get('.primary-action').click();
-
+        cy.log('Verify Current Date');
         cy.get(':nth-child(2) > .section-body > :nth-child(2) > form > .frappe-control > .form-group > .control-input-wrapper > .control-input > .input-with-feedback').should('have.value', env.date);
         cy.wait(2000);
+        cy.log('Select the item');
         cy.get('.rows > .grid-row > .data-row > [data-fieldname="item_code"]').type(env.item);
+        cy.log('Verify BOM');
         cy.get(':nth-child(4) > .field-area > .form-group > .link-field > .awesomplete > .input-with-feedback').click();
         cy.wait(1000);
         cy.get(':nth-child(4) > .field-area > .form-group > .link-field > .awesomplete > .input-with-feedback').should('have.value', env.bomNo);  
         cy.get('.text-right > .field-area > .form-group > .input-with-feedback').click();
-        cy.get('.text-right > .field-area > .form-group > .input-with-feedback').type("230");
+        cy.wait(1000);
+        cy.get('.text-right > .field-area > .form-group > .input-with-feedback').type("290");
         cy.get(':nth-child(2) > form > div[data-fieldtype="Link"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback')
           .type(env.warehouse)  
           .wait(500);  
@@ -32,10 +36,10 @@ describe('Assessment', () => {
         cy.get('div[data-fieldname="transfer_materials"] > .form-group > .control-input-wrapper > .control-input > .btn').click();
         cy.get('.modal-body > :nth-child(1) > .form-layout > .form-page > .row > .section-body > .form-column > form > div[data-fieldtype="Table MultiSelect"] > .form-group > .control-input-wrapper > .control-input')
           .type(env.transferWarehouse)
-  
-        cy.get('.awesomplete ul li')  // Adjust the selector if necessary
+          .wait(500)  // Ensure there's enough time for the suggestions to appear
+          .get('.awesomplete ul li')
           .contains(env.transferWarehouse)  // Ensure it contains the warehouse name
-          .click();  
+          .click();
         cy.wait(2000);
         cy.get('.modal-body').click();
         cy.get('.modal-footer > .standard-actions > .btn-primary').click();
@@ -88,7 +92,110 @@ describe('Assessment', () => {
            console.log('Actual text:', text);
            expect(text.trim()).to.eq(env.itemCode6);
         });
-        cy.get('[data-name="new-material-request-plan-item-1"] > .data-row > [data-fieldname="warehouse"]').should('have.value', env.forWarehouse);
-
+        cy.get('[data-name="new-material-request-plan-item-1"] > .data-row > [data-fieldname="warehouse"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.forWarehouse);
+        });
+        cy.get('[data-name="new-material-request-plan-item-2"] > .data-row > [data-fieldname="warehouse"]')
+        .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.forWarehouse);
+        });
+        cy.get('[data-name="new-material-request-plan-item-3"] > .data-row > [data-fieldname="warehouse"]')
+        .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.forWarehouse);
+        });
+        cy.get('[data-name="new-material-request-plan-item-4"] > .data-row > [data-fieldname="warehouse"]')
+        .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.forWarehouse);
+        });
+        cy.get('[data-name="new-material-request-plan-item-5"] > .data-row > [data-fieldname="warehouse"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.forWarehouse);
+        });
+        cy.get('[data-name="new-material-request-plan-item-6"] > .data-row > [data-fieldname="warehouse"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.forWarehouse);
+        });
+        cy.get('[data-name="new-material-request-plan-item-1"] > .data-row > [data-fieldname="required_bom_qty"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.reqQty1);
+        });
+        cy.get('[data-name="new-material-request-plan-item-2"] > .data-row > [data-fieldname="required_bom_qty"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.reqQty1);
+        });
+        cy.get('[data-name="new-material-request-plan-item-3"] > .data-row > [data-fieldname="required_bom_qty"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.reqQty2);
+        });
+        cy.get('[data-name="new-material-request-plan-item-4"] > .data-row > [data-fieldname="required_bom_qty"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.reqQty1);
+        });
+        cy.get('[data-name="new-material-request-plan-item-5"] > .data-row > [data-fieldname="required_bom_qty"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.reqQty1);
+        });
+        cy.get('[data-name="new-material-request-plan-item-6"] > .data-row > [data-fieldname="required_bom_qty"]')
+          .should('exist')
+          .should('be.visible')
+          .invoke('text')
+          .then(text => {
+           console.log('Actual text:', text);
+           expect(text.trim()).to.eq(env.reqQty1);
+        });
+        cy.get('.primary-action > .alt-underline').click();
+        cy.wait(1000);
+        cy.get('.primary-action > .alt-underline').click();
+        cy.get('.modal.show > .modal-dialog > .modal-content > .modal-footer > .standard-actions > .btn-primary').click();
+        cy.get('.modal.show > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close').click();
+        // cy.get('.row > :nth-child(1) > :nth-child(3) > .btn').click();
+        // cy.get('.modal.show > .modal-dialog > .modal-content > .modal-footer > .standard-actions > .btn-primary').click();
+        // cy.get('.modal.show > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close').click();
     });
+      
 });    
