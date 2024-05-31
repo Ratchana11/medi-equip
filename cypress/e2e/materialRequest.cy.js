@@ -9,16 +9,24 @@ describe('Assessment', () => {
         cy.get('#login_password').type(password);
         cy.get('.for-login > .login-content > .form-signin > .page-card-actions > .btn').click();
         cy.location('pathname', { timeout: 10000 }).should('include', '/app');
-        cy.visit('https://demolens.lmnas.com/app/production-plan');
-        cy.get(':nth-child(3) > .list-row > .level-left > .list-subject').click();
-        cy.get('.row > :nth-child(1) > :nth-child(3) > .btn').click();
-        cy.get('.modal-footer > .standard-actions > .btn-primary').click();
+        cy.visit('https://demolens.lmnas.com/app/material-request');
         cy.wait(2000);
-        cy.get('[style="overflow: auto; z-index: 2000; display: block;"] > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close').click();
-        cy.get(':nth-child(3) > .document-link-badge > .badge-link')
-          .click({force: true});
+        cy.get(':nth-child(3) > .list-row > .level-left > .list-subject > .bold > .ellipsis').click();
+        cy.wait(300);
+        cy.get('.inner-group-button > .btn').click();
+        cy.wait(200);
+        cy.get('[data-label="Material%20Transfer"]').click();
+        cy.wait(500);
+        cy.get('.primary-action > .alt-underline').click();
+        cy.wait(200);
+        cy.get('.primary-action > .alt-underline').click();
+        cy.get('.modal-footer > .standard-actions > .btn-primary').click({force: true});
+       
+        
 
         
     });
       
 });    
+      
+  
