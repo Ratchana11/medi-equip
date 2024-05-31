@@ -1,4 +1,3 @@
-import * as env from './env2.js';
 /// <reference types="cypress" />
 describe('Assessment', () => {
     
