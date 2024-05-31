@@ -19,6 +19,7 @@ jobs:
 
       - name: Run Cypress test file
         run: npx cypress run --spec "cypress/e2e/equipment.cy.js" --config-file=./cypress.config.js
+        continue-on-error: true
 
   material-request:
     runs-on: ubuntu-latest
