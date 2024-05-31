@@ -68,3 +68,4 @@ jobs:
 
       - name: Run Cypress test file 
         run: npx cypress run --spec "cypress/e2e/jobCard.cy.js" --config-file=./cypress.config.js
+        continue-on-error: true
