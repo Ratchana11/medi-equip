@@ -36,6 +36,7 @@ describe('Assessment', () => {
         cy.get('div[data-fieldname="transfer_materials"] > .form-group > .control-input-wrapper > .control-input > .btn').click();
         cy.get('.modal-body > :nth-child(1) > .form-layout > .form-page > .row > .section-body > .form-column > form > div[data-fieldtype="Table MultiSelect"] > .form-group > .control-input-wrapper > .control-input')
           .type(env.transferWarehouse) // Type the value into the input field
+          .wait(6000)
           .then(() => {
             cy.get('.awesomplete ul li')
               .contains(env.transferWarehouse)
@@ -43,9 +44,6 @@ describe('Assessment', () => {
               .first()
               .click();
             });
-
-
-
         cy.wait(2000);
         cy.get('.modal-body').click();
         cy.get('.modal-footer > .standard-actions > .btn-primary').click();
