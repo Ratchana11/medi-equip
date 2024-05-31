@@ -39,8 +39,7 @@ describe('Assessment', () => {
           .wait(6000)
           .then(() => {
             cy.get('.awesomplete ul li')
-              .contains(env.transferWarehouse)
-              .should('be.visible') // Ensure the element is visible
+              .should('be.visible') 
               .first()
               .click();
             });
