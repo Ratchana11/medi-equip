@@ -41,7 +41,7 @@ describe('Assessment', () => {
             cy.get('.awesomplete ul li')
               .should('be.visible') 
               .first()
-              .click();
+              .click({force: true});
             });
         cy.wait(2000);
         cy.get('.modal-body').click();
