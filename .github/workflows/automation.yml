@@ -18,8 +18,7 @@ jobs:
         run: npm install cypress --save-dev
 
       - name: Run Cypress test file
-        run: npx cypress run --spec "cypress/e2e/equipment.cy.js" --config-file=./cypress.config.js
-        continue-on-error: true
+        run: npx cypress run --spec "cypress/e2e/quotation.cy.js" --config-file=./cypress.config.cjs
 
   material-request:
     runs-on: ubuntu-latest
@@ -35,7 +34,7 @@ jobs:
         run: npm install cypress --save-dev
 
       - name: Run Cypress test file 
-        run: npx cypress run --spec "cypress/e2e/materialRequest.cy.js" --config-file=./cypress.config.js
+        run: npx cypress run --spec "cypress/e2e/quotation.cy.js" --config-file=./cypress.config.cjs
 
   workorder:
     runs-on: ubuntu-latest
@@ -51,7 +50,7 @@ jobs:
         run: npm install cypress --save-dev
 
       - name: Run Cypress test file 
-        run: npx cypress run --spec "cypress/e2e/workOrder.cy.js" --config-file=./cypress.config.js
+        run: npx cypress run --spec "cypress/e2e/quotation.cy.js" --config-file=./cypress.config.cjs
 
   jobcard:
     runs-on: ubuntu-latest
@@ -67,5 +66,4 @@ jobs:
         run: npm install cypress --save-dev
 
       - name: Run Cypress test file 
-        run: npx cypress run --spec "cypress/e2e/jobCard.cy.js" --config-file=./cypress.config.js
-        continue-on-error: true
+        run: npx cypress run --spec "cypress/e2e/quotation.cy.js" --config-file=./cypress.config.cjs
