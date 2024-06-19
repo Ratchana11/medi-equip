@@ -8,13 +8,13 @@ describe('Quotation Flow for EU000010500028', () => {
       const username = Cypress.env('username');
       const password = Cypress.env('password');
       //cy.visit(env.source);
-      cy.visit('https://qsgbcz.lmnas.com/login');
+      cy.visit(env.source);
       cy.get('#login_email').type(username);
       cy.get('#login_password').type(password);
       cy.get('.for-login > .login-content > .form-signin > .page-card-actions > .btn').click();
       cy.location('pathname', { timeout: 10000 }).should('include', '/app');
       //cy.visit(env.target);
-      cy.visit('https://qsgbcz.lmnas.com/app/quotation');
+      cy.visit(env.target);
       cy.get('.primary-action').click();
       // Sequence 2
       // Default input at creation of quotation
@@ -26,14 +26,12 @@ describe('Quotation Flow for EU000010500028', () => {
       // Sequence 2.1
       // Mandatory fields in details tab
       cy.get('.tab-content', { timeout: 20000 }).should('be.visible');
-      // cy.get(':nth-child(2) > .section-body > :nth-child(3) > form > div[data-fieldtype="Data"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { scrollBehavior: 'center' })
-      //   .type('Test Automate')
-      //   .type('{enter}'); 
+      
       cy.get(':nth-child(2) > .section-body > :nth-child(3) > form > div[data-fieldtype="Data"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { scrollBehavior: 'center' })
         .should('be.visible')     
         .wait(500)                 
         .focus()                   
-        .type('Test Automate', { force: true }) 
+        .type(env.projectName, { force: true }) 
         .type('{enter}');     
 
       cy.get('div[data-fieldname="request_date"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { timeout: 10000 }).should('be.visible');
@@ -179,16 +177,6 @@ describe('Quotation Flow for EU000010500028', () => {
       cy.wait(3000);
 
       //Cancel the Quotation
-      // cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .btn-secondary').click({force: true});  
-      // cy.get('.modal.show > .modal-dialog > .modal-content').then($modal => {
-      //   if ($modal.is(':visible')) {
-      //     cy.get('.modal.show > .modal-dialog > .modal-content > .modal-footer > .standard-actions > .btn-primary')
-      //       .click({ force: true });
-      //   }
-      //   cy.get('.modal.show > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close')
-      //       .click({force: true});
-      //   cy.wait(3000); 
-      // });
       
       cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .btn-secondary')
         .click({ force: true });
