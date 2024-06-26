@@ -7,15 +7,14 @@ describe('Quotation Flow for EU000010500028', () => {
       // Login and navigate to new quotation
       const username = Cypress.env('username');
       const password = Cypress.env('password');
-      //cy.visit(env.source);
       cy.visit(env.source);
       cy.get('#login_email').type(username);
       cy.get('#login_password').type(password);
       cy.get('.for-login > .login-content > .form-signin > .page-card-actions > .btn').click();
       cy.location('pathname', { timeout: 10000 }).should('include', '/app');
-      //cy.visit(env.target);
       cy.visit(env.target);
       cy.get('.primary-action').click();
+      
       // Sequence 2
       // Default input at creation of quotation
       cy.get('.tab-content', { timeout: 10000 }).should('be.visible');
@@ -23,6 +22,7 @@ describe('Quotation Flow for EU000010500028', () => {
       cy.get('#quotation-__details > :nth-child(2) > .section-body > :nth-child(3) > form > div[data-fieldtype="Select"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback').should('have.value', env.orderType);
       cy.get('div[data-fieldname="valid_till"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback').should('have.value', env.validTill)
       cy.get('#quotation-__details > :nth-child(2) > .section-body > :nth-child(1) > form > div[data-fieldtype="Link"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback').should('have.value', env.quotationTo)
+      
       // Sequence 2.1
       // Mandatory fields in details tab
       cy.get('.tab-content', { timeout: 20000 }).should('be.visible');
@@ -41,6 +41,7 @@ describe('Quotation Flow for EU000010500028', () => {
         .focus()
         .type(env.requestDate, { force: true })
         .type('{enter}'); 
+        
       // Sequence 3
       // Validate the customer informations
       cy.get('.tab-content', { timeout: 10000 }).should('be.visible');
@@ -67,7 +68,7 @@ describe('Quotation Flow for EU000010500028', () => {
       cy.get('#quotation-terms_tab > :nth-child(2) > .section-body > :nth-child(1) > form > div[data-fieldtype="Select"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { timeout: 10000 }).should('have.value', env.incoterms);
       cy.get('#quotation-terms_tab > :nth-child(3) > .section-body > :nth-child(1) > form > .frappe-control > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.paymentTerms);
       cy.get('#quotation-terms_tab > :nth-child(4) > .section-body > .form-column > form > .input-max-width > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.terms);
-
+      
       // Sequence 4
       // Validate the Item Details
       cy.get('#quotation-__details-tab', { timeout: 10000 }).should('be.visible');
@@ -109,9 +110,11 @@ describe('Quotation Flow for EU000010500028', () => {
             expect($element.val()).to.equal(env.roundedTotal);
           }
         });
+        
       // Sequence 4.1
       // Item rate should be red if it is more than 3 month for qsgbcz
       cy.get('.col-xs-2.bold > .field-area > .form-group > .input-with-feedback', { timeout: 10000 }).should('have.css', 'color', 'rgb(255, 0, 0)');
+
       // Sequence 5
       // Tax and Charges
       cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .control-label', { timeout: 10000 }).should('be.visible');
@@ -164,7 +167,8 @@ describe('Quotation Flow for EU000010500028', () => {
             expect($element.val()).to.equal(env.roundedTotalwithTax);
           }
         });
-//Sequence 6
+        
+      //Sequence 6
       //Save the Quotation
       cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .primary-action').click();
       cy.wait(2000);
@@ -186,29 +190,27 @@ describe('Quotation Flow for EU000010500028', () => {
           cy.get('.modal.show > .modal-dialog > .modal-content > .modal-footer > .standard-actions > .btn-primary')
             .click({ force: true });
 
-    // Wait for any potential animations to complete
+      // Wait for any potential animations to complete
           cy.wait(500);
     
-    // Ensure the modal is still visible after the primary button click
+      // Ensure the modal is still visible after the primary button click
           cy.get('.modal.show > .modal-dialog > .modal-content').should('be.visible');
       }
   
       cy.get('.modal.show > .modal-dialog > .modal-content > .modal-header > .modal-actions > .btn-modal-close')
         .click({ force: true });
 
-  // Ensure the modal is closed before proceeding
+      // Ensure the modal is closed before proceeding
       cy.get('.modal.show').should('not.exist');
       cy.wait(500); // Reduce wait time after ensuring modal is closed
   
-  // Ensure the page is ready for the next actions
+      // Ensure the page is ready for the next actions
       cy.get('body').then($body => {
         if ($body.find('.modal.show').length === 0) {
           cy.wait(500); // Optional additional wait to ensure stability
         }
       });
-    });
-
-      
+      });
   
       //Delete the Quotation
       cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .menu-btn-group > .btn').click({force: true});
@@ -216,5 +218,6 @@ describe('Quotation Flow for EU000010500028', () => {
       cy.get('.menu-btn-group > .dropdown-menu > :nth-child(6) > .grey-link').click();
       cy.wait(3000);
       cy.get('.modal.show > .modal-dialog > .modal-content > .modal-footer > .standard-actions > .btn-primary').click(); 
+      
 	});
 });
