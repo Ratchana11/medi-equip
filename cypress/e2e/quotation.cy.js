@@ -1,4 +1,4 @@
-import * as env from './variables/envSales TableEU000010500028.js';
+import * as env from './variables/envQuotationEU000010500028.js';
 
 describe('Sales Table Report', () => {
     it('Sales Table', () => {
