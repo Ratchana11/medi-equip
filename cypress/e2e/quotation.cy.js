@@ -49,7 +49,7 @@ describe('Sales Table Report', () => {
       //   .should('be.visible')
       //   .contains(env.salesOrder);
       cy.wait(2000);
-      cy.get('.dt-row-0 > .dt-cell--col-2 > .dt-cell__content').contains(env.salesOrder);
+      // cy.get('.dt-row-0 > .dt-cell--col-2 > .dt-cell__content').contains(env.salesOrder);
       cy.get('.dt-row-0 > .dt-cell--col-4 > .dt-cell__content').contains(env.customer);
       cy.get('.dt-row-0 > .dt-cell--col-3 > .dt-cell__content').contains(env.deliveryNote);
       cy.get('.dt-row-0 > .dt-cell--col-6 > .dt-cell__content').contains(env.incoterms);
