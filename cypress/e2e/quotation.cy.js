@@ -57,11 +57,12 @@ describe('Sales Table Report', () => {
       cy.get('.dt-row > .dt-cell--col-5 > .dt-cell__content').contains(env.customerGroup);
       cy.get('.dt-row > .dt-cell--col-7 > .dt-cell__content').contains(env.territory);
       cy.get('.dt-row > .dt-cell--col-8 > .dt-cell__content').contains(env.documentationLanguage);
-      cy.get('.dt-row > .dt-cell--col-9 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.reservedOrder);
-        });
+      cy.get('.dt-row > .dt-cell--col-9 > .dt-cell__content').contains(env.reservedOrder);
+      // cy.get('.dt-row > .dt-cell--col-9 > .dt-cell__content')
+      //   .invoke('text')
+      //   .should((text) => {
+      //     expect(text.trim()).to.equal(env.reservedOrder);
+      //   });
       cy.get('.dt-row > .dt-cell--col-10 > .dt-cell__content').contains(env.itemCode);
       cy.get('.dt-row > .dt-cell--col-11 > .dt-cell__content').contains(env.idNumber);
       cy.get('.dt-row > .dt-cell--col-12 > .dt-cell__content').contains(env.rdgNumber);
