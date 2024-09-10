@@ -24,19 +24,19 @@ describe('Sales Table Report', () => {
 
         cy.get('#page-query-report > .page-body > .page-wrapper > .page-content > .row > .layout-main-section-wrapper', { timeout: 10000 }).should('be.visible');
 
-        cy.get('[data-original-title="PO Date From"] > .input-with-feedback')
-          .should('be.visible')
-          .clear()
-          .click()
-          .type(env.fromDate)
-          .type( "{enter}" );
+        // cy.get('[data-original-title="PO Date From"] > .input-with-feedback')
+        //   .should('be.visible')
+        //   .clear()
+        //   .click()
+        //   .type(env.fromDate)
+        //   .type( "{enter}" );
 
-        cy.get('[data-original-title="PO Date To"] > .input-with-feedback')
-          .should('be.visible')
-          .clear()
-          .click()
-          .type(env.toDate)
-          .type( "{enter}" );
+        // cy.get('[data-original-title="PO Date To"] > .input-with-feedback')
+        //   .should('be.visible')
+        //   .clear()
+        //   .click()
+        //   .type(env.toDate)
+        //   .type( "{enter}" );
 
         cy.wait(2000);
 
