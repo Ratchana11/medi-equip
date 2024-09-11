@@ -1,240 +1,187 @@
-/* eslint-disable */
+
 import * as env from './variables/envQuotationEU000010500028.js';
-
-describe('Sales Table Report', () => {
-  it('Sales Table', () => {
-    const username = Cypress.env('username');
-    const password = Cypress.env('password');
-      // Sequence 1: Login and navigate to new quotation
+/// <reference types="cypress" />
+describe('Quotation Flow for EU000010500028', () => {
+	it('Quotation', () => {
+      // Sequence 1
+      // Login and navigate to new quotation
+      const username = Cypress.env('username');
+      const password = Cypress.env('password');
       cy.visit(env.source);
-
-      // Typing into inputs
       cy.get('#login_email').type(username);
       cy.get('#login_password').type(password);
-
-      // Clicking the login button and waiting for navigation
-      cy.get('.form-signin > :nth-child(1) > .page-card-actions > .btn').click({force: true});
+      cy.get('.form-signin > :nth-child(1) > .page-card-actions > .btn').click();
       cy.location('pathname', { timeout: 10000 }).should('include', '/app');
-
-
-      // Visit the target URL
       cy.visit(env.target);
-
-      // Clear and type dates in the input fields
-      cy.wait(1000);
-
-      cy.get('#page-query-report > .page-body > .page-wrapper > .page-content > .row > .layout-main-section-wrapper', { timeout: 10000 }).should('be.visible');
-
-      // cy.get('[data-original-title="PO Date From"] > .input-with-feedback')
-      //   .should('be.visible')
-      //   .clear()
-      //   .click()
-      //   .type(env.fromDate)
-      //   .type( "{enter}" );
-      // cy.get('[data-original-title="PO Date To"] > .input-with-feedback')
-      //   .should('be.visible')
-      //   .clear()
-      //   .click()
-      //   .type(env.toDate)
-      //   .type( "{enter}" );
-      // cy.get('.col').click();
-      // cy.wait(2000);
-
-      cy.get('#page-query-report > .page-body > .page-wrapper > .page-content > .row > .layout-main-section-wrapper', { timeout: 10000 }).should('be.visible');
-      cy.wait(30000);
-      cy.get('.dt-cell--col-2 > .dt-cell__content > .dt-filter')
-        .should('be.visible')
-        .type(env.salesOrder);
-      cy.wait(4000);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-2 > .dt-cell__content', { timeout: 10000 })
-        .should('be.visible')
-        .contains(env.salesOrder);
+      cy.get('.primary-action').click();
       
-      //cy.get('.dt-scrollable > .dt-row > .dt-cell--col-2 > .dt-cell__content').contains(env.salesOrder);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-4 > .dt-cell__content').contains(env.customer);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-3 > .dt-cell__content').contains(env.deliveryNote);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-6 > .dt-cell__content').contains(env.incoterms);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-5 > .dt-cell__content').contains(env.customerGroup);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-7 > .dt-cell__content').contains(env.territory);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-8 > .dt-cell__content').contains(env.documentationLanguage);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-9 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.reservedOrder);
-        });
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-10 > .dt-cell__content').contains(env.itemCode);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-11 > .dt-cell__content').contains(env.idNumber);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-12 > .dt-cell__content').contains(env.rdgNumber);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-13 > .dt-cell__content').contains(env.trafoType);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-14 > .dt-cell__content').contains(env.rating);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-15 > .dt-cell__content').contains(env.hvVolt);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-16 > .dt-cell__content').contains(env.lvVolt);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-17 > .dt-cell__content').contains(env.vectorGroup);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-18 > .dt-cell__content').contains(env.uk);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-19 > .dt-cell__content').contains(env.tappings);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-20 > .dt-cell__content').contains(env.p0);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-21 > .dt-cell__content').contains(env.pk);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-22 > .dt-cell__content').contains(env.li);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-23 > .dt-cell__content').contains(env.thdi);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-24 > .dt-cell__content').contains(env.ipProtection);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-25 > .dt-cell__content').contains(env.electroStaticScreen);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-26 > .dt-cell__content').contains(env.hv1Volt);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-27 > .dt-cell__content').contains(env.hv2Volt);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-28 > .dt-cell__content').contains(env.po);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-29 > .dt-cell__content').contains(env.poDate);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-30 > .dt-cell__content')
-        .should('have.css', 'color', 'rgb(51, 60, 68)');
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-31 > .dt-cell__content').contains(env.oaConfirmedDate);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-32 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.plannedProductionEndDate);
-        });
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-33 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.plannedWeeks);
-        });  
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-34 > .dt-cell__content').contains(env.deliveryDate);  
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-35 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.onTimeDelivery);
-        });  
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-36 > .dt-cell__content').contains(env.storageFee);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-37 > .dt-cell__content').contains(env.transformerStatus);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-38 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.sapReference);
-        });  
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-39 > .dt-cell__content').contains(env.orderValue);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-40 > .dt-cell__content').contains(env.priceGTS);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-41 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.invoiceNumber);
-        });  
+      // Sequence 2
+      // Default input at creation of quotation
+      cy.get('.tab-content', { timeout: 10000 }).should('be.visible');
+      cy.get('div[data-fieldname="transaction_date"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback').should('have.value', env.date);
+      cy.get('#quotation-__details > :nth-child(2) > .section-body > :nth-child(3) > form > div[data-fieldtype="Select"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback').should('have.value', env.orderType);
+      cy.get('div[data-fieldname="valid_till"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback').should('have.value', env.validTill)
+      cy.get('#quotation-__details > :nth-child(2) > .section-body > :nth-child(1) > form > div[data-fieldtype="Link"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback').should('have.value', env.quotationTo)
+      
+      // Sequence 2.1
+      // Mandatory fields in details tab
+      cy.get('.tab-content', { timeout: 20000 }).should('be.visible');
+      
+      cy.get(':nth-child(2) > .section-body > :nth-child(3) > form > div[data-fieldtype="Data"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { scrollBehavior: 'center' })
+        .should('be.visible')     
+        .wait(500)                 
+        .focus()                   
+        .type(env.projectName, { force: true }) 
+        .type('{enter}');     
 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-42 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.invoiceDate);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-43 > .dt-cell__content').contains(env.paymentCondition);  
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-44 > .dt-cell__content') 
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.productionEndDate);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-45 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.gtaSerialNumber);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-46 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.companyGurantee);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-47 > .dt-cell__content').contains(env.antiVibrationPads);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-48 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.enclosure);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-49 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.ballPoint);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-50 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.cupal);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-51 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.busbars);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-52 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.fan);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-53 > .dt-cell__content').contains(env.controlUnit);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-54 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.sensors);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-55 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.forkLift);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-56 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.siliconFree);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-57 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.testLab);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-58 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.otherAccessories);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-59 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.engineeringRequired);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-60 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.earthingSwith);
-        }); 
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-61 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.surgeArrester);
-        });   
+      cy.get('div[data-fieldname="request_date"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { timeout: 10000 }).should('be.visible');
+      cy.get('div[data-fieldname="request_date"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { scrollBehavior: 'center' })
+        .should('be.visible') 
+        .wait(1000)
+        .focus()
+        .type(env.requestDate, { force: true })
+        .type('{enter}'); 
         
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-62 > .dt-cell__content').contains(env.sgbAccount);
-      cy.get('.dt-scrollable > .dt-row > .dt-cell--col-63 > .dt-cell__content')
+      // Sequence 3
+      // Validate the customer informations
+      cy.get('.tab-content', { timeout: 10000 }).should('be.visible');
+      cy.get('div[data-fieldtype="Dynamic Link"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { scrollBehavior: 'center' })
+        .type(env.customerName)
+        .type('{enter}');
+      cy.get('#quotation-__details > :nth-child(3) > .section-body > :nth-child(1) > form > div[data-fieldtype="Link"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('be.visible');
+      cy.get('#quotation-__details > :nth-child(3) > .section-body > :nth-child(1) > form > div[data-fieldtype="Link"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.currency);
+      cy.get('div[data-fieldname="selling_price_list"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.priceList);
+      cy.get('#quotation-address_and_contact_tab-tab', { timeout: 10000 }).should('be.visible');
+      cy.get('#quotation-address_and_contact_tab-tab').click();
+      cy.get('#quotation-address_and_contact_tab > :nth-child(2) > .section-body > :nth-child(1) > form > .input-max-width > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('be.visible');
+      cy.get('#quotation-address_and_contact_tab > :nth-child(2) > .section-body > :nth-child(1) > form > .input-max-width > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.customerAddress);
+      cy.get(':nth-child(1) > form > [data-fieldtype="Small Text"] > .form-group > .control-input-wrapper > .control-value')
         .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.agent);
-        });   
-        cy.get('.dt-scrollable > .dt-row > .dt-cell--col-64 > .dt-cell__content')
+        .then(text => {
+          expect(text.trim()).to.match(new RegExp(env.address.replace(/\s+/g, '\\s*')));
+        });
+      cy.get(':nth-child(2) > .section-body > :nth-child(2) > form > div[data-fieldtype="Link"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.contactPerson);
+      cy.get('#quotation-address_and_contact_tab > :nth-child(3) > .section-body > :nth-child(1) > form > div[data-fieldtype="Link"] > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.shippingAddress);
+      cy.get('#quotation-terms_tab-tab', { timeout: 10000 }).should('be.visible');
+      cy.get('#quotation-terms_tab-tab').click();
+      cy.get('#quotation-terms_tab > :nth-child(2) > .section-body > :nth-child(1) > form > div[data-fieldtype="Select"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { timeout: 10000 }).should('be.visible');
+      cy.get('#quotation-terms_tab > :nth-child(2) > .section-body > :nth-child(1) > form > div[data-fieldtype="Select"] > .form-group > .control-input-wrapper > .control-input > .input-with-feedback', { timeout: 10000 }).should('have.value', env.incoterms);
+      cy.get('#quotation-terms_tab > :nth-child(3) > .section-body > :nth-child(1) > form > .frappe-control > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.paymentTerms);
+      cy.get('#quotation-terms_tab > :nth-child(4) > .section-body > .form-column > form > .input-max-width > .form-group > .control-input-wrapper > .control-input > .link-field > .awesomplete > .input-with-feedback', { timeout: 10000 }).should('have.value', env.terms);
+
+      // Sequence 4
+      // Validate the Item Details
+      cy.get('#quotation-__details-tab', { timeout: 10000 }).should('be.visible');
+      cy.get('#quotation-__details-tab').click();
+      cy.get('.rows > .grid-row > .data-row > .col-xs-4', { scrollBehavior: 'center' })
+        .type(env.itemCode)
+        .wait(1000)
+      cy.get('#awesomplete_list_33 > :nth-child(4)').click({ force: true });
+      cy.wait(2000);
+      cy.get('#page-query-report > .page-head > .container > .row > .col-md-4 > .fill-width > :nth-child(1) > .flex > .ellipsis').should('be.visible');
+      cy.wait(30000);
+      cy.get('.dt-cell--col-2 > .dt-cell__content > .dt-filter').should('be.visible')
+        .click()
+        .type(env.itemCode);
+      cy.wait(2000);
+      cy.get('.dt-scrollable > .dt-row').should('be.visible');
+      cy.get('.dt-cell__content > .btn').should('be.visible')
+        .click({ force: true });
+      cy.wait(20000);
+      cy.get('#quotation-__details-tab', { timeout: 10000 }).should('be.visible');
+      cy.get(':nth-child(4) > .section-body > .form-column > form > .frappe-control.form-group > .grid-field > .form-grid-container > .form-grid').scrollIntoView()
+      cy.get('.rows > .grid-row > .data-row > .col-xs-4')
         .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.notes);
-        });   
-        cy.get('.dt-scrollable > .dt-row > .dt-cell--col-65 > .dt-cell__content')
+        .then((text) => {
+          expect(text.trim()).to.eq(env.itemCode);
+        });
+      cy.get('.col-xs-1.bold').should('have.text', env.quantity);
+      cy.get('.col-xs-2.bold').should('have.text', env.rate);
+      cy.get('.rows > .grid-row > .data-row > [data-fieldname="amount"]').should('have.text', env.amount);
+      cy.get('[data-fieldname="total_qty"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
+        .should('be.visible')
+        .then($element => {
+          if ($element.val() !== '') {
+            expect($element.val()).to.equal(env.totalQuantity);
+          }
+        });
+      cy.get('[data-fieldname="total"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
+        .should('be.visible')
+        .then($element => {
+          if ($element.val() !== '') {
+            expect($element.val()).to.equal(env.totalCost);
+          }
+        });
+      cy.get('[data-fieldname="grand_total"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
+        .should('be.visible')
+        .then($element => {
+          if ($element.val() !== '') {
+            expect($element.val()).to.equal(env.grandTotal);
+          }
+        });
+      cy.get('[data-fieldname="rounded_total"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
+        .should('be.visible')
+        .then($element => {
+          if ($element.val() !== '') {
+            expect($element.val()).to.equal(env.roundedTotal);
+          }
+        });
+        
+      // Sequence 4.1
+      // Item rate should be red if it is more than 3 month for qsgbcz
+      cy.get('.col-xs-2.bold', { timeout: 10000 }).should('have.css', 'color', 'rgb(255, 0, 0)');
+
+      // Sequence 5
+      // Tax and Charges
+      cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .control-label', { timeout: 10000 }).should('be.visible');
+      cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .form-clickable-section > .flex > .grid-buttons > .grid-add-row', { timeout: 10000 }).click();
+      cy.get('.rows > .grid-row > .data-row > [data-fieldname="charge_type"]').click();
+      cy.get('.rows > .grid-row > .data-row > [data-fieldname="charge_type"]').should('be.visible')
+        .find('select') 
+        .should('be.visible')
+        .select(env.taxType) 
+        .should('have.value', env.taxType); 
+      cy.get('.field-area > .form-group > .link-field > .awesomplete > .input-with-feedback').click();
+      cy.get('#awesomplete_list_37').should('be.visible');
+      cy.get('#awesomplete_list_37 li').contains(env.taxAccounthead).click();
+      cy.wait(2000); 
+      cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .form-grid-container > .form-grid > .grid-body > .rows > .grid-row > .data-row > [data-fieldname="rate"]', { timeout: 10000 })
         .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.prepaymentInvoice);
-        });   
-        cy.get('.dt-scrollable > .dt-row > .dt-cell--col-66 > .dt-cell__content')
+        .then(text => {
+          expect(text.trim()).to.equal(env.taxRate);
+        });
+      cy.get('.rows > .grid-row > .data-row > [data-fieldname="tax_amount"]', { timeout: 10000 })
         .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.prepaymentStatus);
-        });   
-        cy.get('.dt-scrollable > .dt-row > .dt-cell--col-67 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.prepaymentInvoice2);
-        });   
-        cy.get('.dt-scrollable > .dt-row > .dt-cell--col-68 > .dt-cell__content')
-        .invoke('text')
-        .should((text) => {
-          expect(text.trim()).to.equal(env.prepaymentStatus2);
-        });      
-  });
-});
+        .then(text => {
+          expect(text.trim()).to.equal(env.taxAmount);
+        });
+      cy.get(':nth-child(7) > .section-body > .form-column > form > [data-fieldtype="Table"] > .grid-field > .form-grid-container > .form-grid > .grid-body > .rows > .grid-row > .data-row > :nth-child(7) > .field-area > .form-group > .input-with-feedback', { timeout: 10000 })
+      .should('be.visible')
+      .then($element => {
+        if ($element.val() !== '') {
+          expect($element.val()).to.equal(env.taxTotal);
+        }
+      });
+      cy.get(':nth-child(8) > .section-body > :nth-child(2) > form > .frappe-control > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
+        .should('be.visible')
+        .then($element => {
+          if ($element.val() !== '') {
+            expect($element.val()).to.equal(env.totalTaxandCharge);
+          }
+        });
+      cy.get('[data-fieldname="grand_total"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
+        .should('be.visible')
+        .then($element => {
+          if ($element.val() !== '') {
+            expect($element.val()).to.equal(env.grandTotalwithTax);
+          }
+        });
+      cy.get('[data-fieldname="rounded_total"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
+        .should('be.visible')
+        .then($element => {
+          if ($element.val() !== '') {
+            expect($element.val()).to.equal(env.roundedTotalwithTax);
+          }
+        });
+	});
+})
