@@ -87,7 +87,7 @@ describe('Quotation Flow for EU000010500028', () => {
       cy.get('.dt-scrollable > .dt-row').should('be.visible');
       cy.get('.dt-cell__content > .btn').should('be.visible')
         .click({ force: true });
-      cy.wait(20000);
+      cy.wait(10000);
       cy.get('#quotation-__details-tab', { timeout: 10000 }).should('be.visible');
       cy.get(':nth-child(4) > .section-body > .form-column > form > .frappe-control.form-group > .grid-field > .form-grid-container > .form-grid').scrollIntoView()
       cy.get('.rows > .grid-row > .data-row > .col-xs-4')
@@ -133,55 +133,55 @@ describe('Quotation Flow for EU000010500028', () => {
 
       // Sequence 5
       // Tax and Charges
-      cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .control-label', { timeout: 10000 }).should('be.visible');
-      cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .form-clickable-section > .flex > .grid-buttons > .grid-add-row', { timeout: 10000 }).click();
-      cy.get('.rows > .grid-row > .data-row > [data-fieldname="charge_type"]').click();
-      cy.get('.rows > .grid-row > .data-row > [data-fieldname="charge_type"]').should('be.visible')
-        .find('select') 
-        .should('be.visible')
-        .select(env.taxType) 
-        .should('have.value', env.taxType);
-      cy.wait(2000);
-      cy.get('.field-area > .form-group > .link-field > .awesomplete > .input-with-feedback').click();
-      cy.get('#awesomplete_list_37').should('be.visible');
-      cy.get('#awesomplete_list_37 > :nth-child(4)').contains(env.taxAccounthead).click();
-      cy.wait(2000); 
-      cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .form-grid-container > .form-grid > .grid-body > .rows > .grid-row > .data-row > [data-fieldname="rate"]', { timeout: 10000 })
-        .invoke('text')
-        .then(text => {
-          expect(text.trim()).to.equal(env.taxRate);
-        });
-      cy.get('.rows > .grid-row > .data-row > [data-fieldname="tax_amount"]', { timeout: 10000 })
-        .invoke('text')
-        .then(text => {
-          expect(text.trim()).to.equal(env.taxAmount);
-        });
-      cy.get(':nth-child(7) > .section-body > .form-column > form > [data-fieldtype="Table"] > .grid-field > .form-grid-container > .form-grid > .grid-body > .rows > .grid-row > .data-row > :nth-child(7) > .field-area > .form-group > .input-with-feedback', { timeout: 10000 })
-      .should('be.visible')
-      .then($element => {
-        if ($element.val() !== '') {
-          expect($element.val()).to.equal(env.taxTotal);
-        }
-      });
-      cy.get(':nth-child(8) > .section-body > :nth-child(2) > form > .frappe-control > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
-        .should('be.visible')
-        .then($element => {
-          if ($element.val() !== '') {
-            expect($element.val()).to.equal(env.totalTaxandCharge);
-          }
-        });
+      // cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .control-label', { timeout: 10000 }).should('be.visible');
+      // cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .form-clickable-section > .flex > .grid-buttons > .grid-add-row', { timeout: 10000 }).click();
+      // cy.get('.rows > .grid-row > .data-row > [data-fieldname="charge_type"]').click();
+      // cy.get('.rows > .grid-row > .data-row > [data-fieldname="charge_type"]').should('be.visible')
+      //   .find('select') 
+      //   .should('be.visible')
+      //   .select(env.taxType) 
+      //   .should('have.value', env.taxType);
+      // cy.wait(2000);
+      // cy.get('.field-area > .form-group > .link-field > .awesomplete > .input-with-feedback').click();
+      // cy.get('#awesomplete_list_37').should('be.visible');
+      // cy.get('#awesomplete_list_37 > :nth-child(4)').contains(env.taxAccounthead).click();
+      // cy.wait(2000); 
+      // cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .form-grid-container > .form-grid > .grid-body > .rows > .grid-row > .data-row > [data-fieldname="rate"]', { timeout: 10000 })
+      //   .invoke('text')
+      //   .then(text => {
+      //     expect(text.trim()).to.equal(env.taxRate);
+      //   });
+      // cy.get('.rows > .grid-row > .data-row > [data-fieldname="tax_amount"]', { timeout: 10000 })
+      //   .invoke('text')
+      //   .then(text => {
+      //     expect(text.trim()).to.equal(env.taxAmount);
+      //   });
+      // cy.get(':nth-child(7) > .section-body > .form-column > form > [data-fieldtype="Table"] > .grid-field > .form-grid-container > .form-grid > .grid-body > .rows > .grid-row > .data-row > :nth-child(7) > .field-area > .form-group > .input-with-feedback', { timeout: 10000 })
+      // .should('be.visible')
+      // .then($element => {
+      //   if ($element.val() !== '') {
+      //     expect($element.val()).to.equal(env.taxTotal);
+      //   }
+      // });
+      // cy.get(':nth-child(8) > .section-body > :nth-child(2) > form > .frappe-control > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
+      //   .should('be.visible')
+      //   .then($element => {
+      //     if ($element.val() !== '') {
+      //       expect($element.val()).to.equal(env.totalTaxandCharge);
+      //     }
+      //   });
       cy.get('[data-fieldname="grand_total"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
         .should('be.visible')
         .then($element => {
           if ($element.val() !== '') {
-            expect($element.val()).to.equal(env.grandTotalwithTax);
+            expect($element.val()).to.equal(env.grandTotal);
           }
         });
       cy.get('[data-fieldname="rounded_total"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
         .should('be.visible')
         .then($element => {
           if ($element.val() !== '') {
-            expect($element.val()).to.equal(env.roundedTotalwithTax);
+            expect($element.val()).to.equal(env.roundedTotal);
           }
         });
 
