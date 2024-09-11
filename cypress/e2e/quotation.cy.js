@@ -1,4 +1,4 @@
-
+/* eslint-disable */
 import * as env from './variables/envQuotationEU000010500028.js';
 /// <reference types="cypress" />
 describe('Quotation Flow for EU000010500028', () => {
@@ -140,7 +140,8 @@ describe('Quotation Flow for EU000010500028', () => {
         .find('select') 
         .should('be.visible')
         .select(env.taxType) 
-        .should('have.value', env.taxType); 
+        .should('have.value', env.taxType);
+      cy.wait(2000);
       cy.get('.field-area > .form-group > .link-field > .awesomplete > .input-with-feedback').click();
       cy.get('#awesomplete_list_37').should('be.visible');
       cy.get('#awesomplete_list_37 li').contains(env.taxAccounthead).click();
@@ -183,5 +184,6 @@ describe('Quotation Flow for EU000010500028', () => {
             expect($element.val()).to.equal(env.roundedTotalwithTax);
           }
         });
+
 	});
 })
