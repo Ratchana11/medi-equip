@@ -133,43 +133,6 @@ describe('Quotation Flow for EU000010500028', () => {
 
       // Sequence 5
       // Tax and Charges
-      // cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .control-label', { timeout: 10000 }).should('be.visible');
-      // cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .form-clickable-section > .flex > .grid-buttons > .grid-add-row', { timeout: 10000 }).click();
-      // cy.get('.rows > .grid-row > .data-row > [data-fieldname="charge_type"]').click();
-      // cy.get('.rows > .grid-row > .data-row > [data-fieldname="charge_type"]').should('be.visible')
-      //   .find('select') 
-      //   .should('be.visible')
-      //   .select(env.taxType) 
-      //   .should('have.value', env.taxType);
-      // cy.wait(2000);
-      // cy.get('.field-area > .form-group > .link-field > .awesomplete > .input-with-feedback').click();
-      // cy.get('#awesomplete_list_37').should('be.visible');
-      // cy.get('#awesomplete_list_37 > :nth-child(4)').contains(env.taxAccounthead).click();
-      // cy.wait(2000); 
-      // cy.get(':nth-child(7) > .section-body > .form-column > form > .frappe-control > .grid-field > .form-grid-container > .form-grid > .grid-body > .rows > .grid-row > .data-row > [data-fieldname="rate"]', { timeout: 10000 })
-      //   .invoke('text')
-      //   .then(text => {
-      //     expect(text.trim()).to.equal(env.taxRate);
-      //   });
-      // cy.get('.rows > .grid-row > .data-row > [data-fieldname="tax_amount"]', { timeout: 10000 })
-      //   .invoke('text')
-      //   .then(text => {
-      //     expect(text.trim()).to.equal(env.taxAmount);
-      //   });
-      // cy.get(':nth-child(7) > .section-body > .form-column > form > [data-fieldtype="Table"] > .grid-field > .form-grid-container > .form-grid > .grid-body > .rows > .grid-row > .data-row > :nth-child(7) > .field-area > .form-group > .input-with-feedback', { timeout: 10000 })
-      // .should('be.visible')
-      // .then($element => {
-      //   if ($element.val() !== '') {
-      //     expect($element.val()).to.equal(env.taxTotal);
-      //   }
-      // });
-      // cy.get(':nth-child(8) > .section-body > :nth-child(2) > form > .frappe-control > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
-      //   .should('be.visible')
-      //   .then($element => {
-      //     if ($element.val() !== '') {
-      //       expect($element.val()).to.equal(env.totalTaxandCharge);
-      //     }
-      //   });
       cy.get('[data-fieldname="grand_total"] > .form-group > .control-input-wrapper > .control-value', { timeout: 10000 })
         .should('be.visible')
         .then($element => {
@@ -185,33 +148,33 @@ describe('Quotation Flow for EU000010500028', () => {
           }
         });
 
-      // //Sequence 6
-      // //Save the Quotation
-      // cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .primary-action').click();
-      // cy.wait(4000);
+      //Sequence 6
+      //Save the Quotation
+      cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .primary-action').click();
+      cy.wait(10000);
 
-      // // Submit the quotation
-      // cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .actions-btn-group > .btn').should('be.visible')
-      //   .click();
-      // cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .actions-btn-group > .dropdown-menu > :nth-child(1) > .grey-link').should('be.visible')
-      //   .click({ force: true });
-      // cy.wait(4000);
+      // Submit the quotation
+      cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .actions-btn-group > .btn').should('be.visible')
+        .click();
+      cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .actions-btn-group > .dropdown-menu > :nth-child(1) > .grey-link').should('be.visible')
+        .click({ force: true });
+      cy.wait(10000);
 
-      // // Camcel the quotation
-      // cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .actions-btn-group > .btn').scrollIntoView()
-      //   .click();
-      // cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .actions-btn-group > .dropdown-menu > :nth-child(1) > .grey-link').should('be.visible')
-      //   .click({ force: true });
-      // cy.wait(4000);
+      // Camcel the quotation
+      cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .actions-btn-group > .btn').scrollIntoView()
+        .click();
+      cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .actions-btn-group > .dropdown-menu > :nth-child(1) > .grey-link').should('be.visible')
+        .click({ force: true });
+      cy.wait(10000);
       
-      // // Delete the quotation
-      // cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .menu-btn-group > .btn > :nth-child(1)').should('be.visible')
-      //   .click();
-      // cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .menu-btn-group > .dropdown-menu > :nth-child(6) > .grey-link > .menu-item-label').should('be.visible')
-      //   .click({ force: true });
-      // cy.wait(1000);
-      // cy.get('.modal-content').should('be.visible');
-      // cy.get('.modal-footer > .standard-actions > .btn-primary').should('be.visible')
-      //   .click({ force: true });
+      // Delete the quotation
+      cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .menu-btn-group > .btn > :nth-child(1)').should('be.visible')
+        .click();
+      cy.get('#page-Quotation > .page-head > .container > .row > .col > .standard-actions > .menu-btn-group > .dropdown-menu > :nth-child(6) > .grey-link > .menu-item-label').should('be.visible')
+        .click({ force: true });
+      cy.wait(4000);
+      cy.get('.modal-content').should('be.visible');
+      cy.get('.modal-footer > .standard-actions > .btn-primary').should('be.visible')
+        .click({ force: true });
 	});
 })
